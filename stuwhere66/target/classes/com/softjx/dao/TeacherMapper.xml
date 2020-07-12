@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.softjx.dao.TeacherMapper" >
+  <resultMap id="BaseResultMap" type="com.softjx.model.Teacher" >
+    <id column="tea_id" property="teaId" jdbcType="INTEGER" />
+    <result column="tea_code" property="teaCode" jdbcType="VARCHAR" />
+    <result column="tea_name" property="teaName" jdbcType="VARCHAR" />
+    <result column="sch_code" property="schCode" jdbcType="VARCHAR" />
+    <result column="tea_pass" property="teaPass" jdbcType="VARCHAR" />
+    <result column="tea_sex" property="teaSex" jdbcType="VARCHAR" />
+    <result column="tea_age" property="teaAge" jdbcType="INTEGER" />
+    <result column="tea_create_time" property="teaCreateTime" jdbcType="TIMESTAMP" />
+    <result column="tea_create_by" property="teaCreateBy" jdbcType="VARCHAR" />
+    <result column="tea_flag" property="teaFlag" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    tea_id, tea_code, tea_name, sch_code, tea_pass, tea_sex, tea_age, tea_create_time, 
+    tea_create_by, tea_flag
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.softjx.model.TeacherExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from teacher
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from teacher
+    where tea_id = #{teaId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from teacher
+    where tea_id = #{teaId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.softjx.model.TeacherExample" >
+    delete from teacher
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.softjx.model.Teacher" >
+    insert into teacher (tea_id, tea_code, tea_name, 
+      sch_code, tea_pass, tea_sex, 
+      tea_age, tea_create_time, tea_create_by, 
+      tea_flag)
+    values (#{teaId,jdbcType=INTEGER}, #{teaCode,jdbcType=VARCHAR}, #{teaName,jdbcType=VARCHAR}, 
+      #{schCode,jdbcType=VARCHAR}, #{teaPass,jdbcType=VARCHAR}, #{teaSex,jdbcType=VARCHAR}, 
+      #{teaAge,jdbcType=INTEGER}, #{teaCreateTime,jdbcType=TIMESTAMP}, #{teaCreateBy,jdbcType=VARCHAR}, 
+      #{teaFlag,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.softjx.model.Teacher" >
+    insert into teacher
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="teaId != null" >
+        tea_id,
+      </if>
+      <if test="teaCode != null" >
+        tea_code,
+      </if>
+      <if test="teaName != null" >
+        tea_name,
+      </if>
+      <if test="schCode != null" >
+        sch_code,
+      </if>
+      <if test="teaPass != null" >
+        tea_pass,
+      </if>
+      <if test="teaSex != null" >
+        tea_sex,
+      </if>
+      <if test="teaAge != null" >
+        tea_age,
+      </if>
+      <if test="teaCreateTime != null" >
+        tea_create_time,
+      </if>
+      <if test="teaCreateBy != null" >
+        tea_create_by,
+      </if>
+      <if test="teaFlag != null" >
+        tea_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="teaId != null" >
+        #{teaId,jdbcType=INTEGER},
+      </if>
+      <if test="teaCode != null" >
+        #{teaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="teaName != null" >
+        #{teaName,jdbcType=VARCHAR},
+      </if>
+      <if test="schCode != null" >
+        #{schCode,jdbcType=VARCHAR},
+      </if>
+      <if test="teaPass != null" >
+        #{teaPass,jdbcType=VARCHAR},
+      </if>
+      <if test="teaSex != null" >
+        #{teaSex,jdbcType=VARCHAR},
+      </if>
+      <if test="teaAge != null" >
+        #{teaAge,jdbcType=INTEGER},
+      </if>
+      <if test="teaCreateTime != null" >
+        #{teaCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="teaCreateBy != null" >
+        #{teaCreateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="teaFlag != null" >
+        #{teaFlag,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.softjx.model.TeacherExample" resultType="java.lang.Integer" >
+    select count(*) from teacher
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update teacher
+    <set >
+      <if test="record.teaId != null" >
+        tea_id = #{record.teaId,jdbcType=INTEGER},
+      </if>
+      <if test="record.teaCode != null" >
+        tea_code = #{record.teaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teaName != null" >
+        tea_name = #{record.teaName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.schCode != null" >
+        sch_code = #{record.schCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teaPass != null" >
+        tea_pass = #{record.teaPass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teaSex != null" >
+        tea_sex = #{record.teaSex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teaAge != null" >
+        tea_age = #{record.teaAge,jdbcType=INTEGER},
+      </if>
+      <if test="record.teaCreateTime != null" >
+        tea_create_time = #{record.teaCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.teaCreateBy != null" >
+        tea_create_by = #{record.teaCreateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teaFlag != null" >
+        tea_flag = #{record.teaFlag,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update teacher
+    set tea_id = #{record.teaId,jdbcType=INTEGER},
+      tea_code = #{record.teaCode,jdbcType=VARCHAR},
+      tea_name = #{record.teaName,jdbcType=VARCHAR},
+      sch_code = #{record.schCode,jdbcType=VARCHAR},
+      tea_pass = #{record.teaPass,jdbcType=VARCHAR},
+      tea_sex = #{record.teaSex,jdbcType=VARCHAR},
+      tea_age = #{record.teaAge,jdbcType=INTEGER},
+      tea_create_time = #{record.teaCreateTime,jdbcType=TIMESTAMP},
+      tea_create_by = #{record.teaCreateBy,jdbcType=VARCHAR},
+      tea_flag = #{record.teaFlag,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.softjx.model.Teacher" >
+    update teacher
+    <set >
+      <if test="teaCode != null" >
+        tea_code = #{teaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="teaName != null" >
+        tea_name = #{teaName,jdbcType=VARCHAR},
+      </if>
+      <if test="schCode != null" >
+        sch_code = #{schCode,jdbcType=VARCHAR},
+      </if>
+      <if test="teaPass != null" >
+        tea_pass = #{teaPass,jdbcType=VARCHAR},
+      </if>
+      <if test="teaSex != null" >
+        tea_sex = #{teaSex,jdbcType=VARCHAR},
+      </if>
+      <if test="teaAge != null" >
+        tea_age = #{teaAge,jdbcType=INTEGER},
+      </if>
+      <if test="teaCreateTime != null" >
+        tea_create_time = #{teaCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="teaCreateBy != null" >
+        tea_create_by = #{teaCreateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="teaFlag != null" >
+        tea_flag = #{teaFlag,jdbcType=BIT},
+      </if>
+    </set>
+    where tea_id = #{teaId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.softjx.model.Teacher" >
+    update teacher
+    set tea_code = #{teaCode,jdbcType=VARCHAR},
+      tea_name = #{teaName,jdbcType=VARCHAR},
+      sch_code = #{schCode,jdbcType=VARCHAR},
+      tea_pass = #{teaPass,jdbcType=VARCHAR},
+      tea_sex = #{teaSex,jdbcType=VARCHAR},
+      tea_age = #{teaAge,jdbcType=INTEGER},
+      tea_create_time = #{teaCreateTime,jdbcType=TIMESTAMP},
+      tea_create_by = #{teaCreateBy,jdbcType=VARCHAR},
+      tea_flag = #{teaFlag,jdbcType=BIT}
+    where tea_id = #{teaId,jdbcType=INTEGER}
+  </update>
+</mapper>

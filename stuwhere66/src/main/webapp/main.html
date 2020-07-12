@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>首页--layui后台管理模板 2.0</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+	<link rel="stylesheet" href="static/layui/css/layui.css" media="all" />
+	<link rel="stylesheet" href="static/layui/css/public.css" media="all" />
+</head>
+<body class="childrenBody">
+<blockquote class="layui-elem-quote layui-bg-green" style="hight:200px;">
+	<div id="nowTime" style="float:right;"></div>
+</blockquote>
+
+<marquee onmouseover="this.stop()" onmouseout="this.start()"  scrollAmount=2 width=950><font color="black"><h3>欢迎使用本系统!!!</h3></font></marquee> 
+	
+<!-- <marquee scrollAmount=2 width=950><a href="student/toUpdateNews" >本人注册登录请先完善个人信息</a></marquee> -->
+<!-- <img src="static/images/bg/bg1.jpg"  style="margin-left: 0px" />  -->
+
+<div class="layui-carousel" id="test1">
+		<div carousel-item>
+			<div><img src="static/images/bg/bg1.jpg" /></div>
+			
+			<!-- <div><img src="static/images/bg/666.jpg" /></div>  -->
+			<div><img src="static/images/bg/222.jpeg" /></div>
+			
+			<!-- <div><img src="static/images/bg/123.jpg" /></div>
+			<div><img src="static/images/bg/1234.png" /></div>
+			<div><img src="static/images/bg/555.jpeg" /></div> -->
+			
+			
+		</div>
+		
+	</div>
+<script type="text/javascript" src="static/layui/layui.js"></script>
+<script type="text/javascript" src="static/layui/main.js"></script>
+
+
+
+<script>
+layui.use('carousel', function(){
+	  var carousel = layui.carousel;
+	  //建造实例
+	  carousel.render({
+	    elem: '#test1'
+	    ,height:'800px'
+	    ,width: '100%' //设置容器宽度
+	    ,arrow: 'display' //始终显示箭头
+	    //,anim: 'updown' //切换动画方式
+	  });
+	});
+
+</script>	
+</body>
+</html>
